@@ -1,0 +1,26 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql:8.4
+    container_name: mysql_8_4
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 4G
+        reservations:
+          cpus: '0.1'
+          memory: 4G
+    restart: always
+    volumes:
+      - ./mysqld:/var/run/mysqld/
+      - ./data_8:/var/lib/mysql  
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    # (this is just an example, not intended to be a production configuration)
+    ports:
+      - 3306:3306
+
